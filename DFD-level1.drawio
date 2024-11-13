@@ -1,9 +1,91 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.4">
   <diagram name="第 1 页" id="-2cqNQUyF2al-3nTo01_">
-    <mxGraphModel>
+    <mxGraphModel dx="1221" dy="725" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-16" value="User" style="whiteSpace=wrap;strokeWidth=2;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="354" y="20" width="92" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-17" value="0: Web Page Generator" style="whiteSpace=wrap;strokeWidth=2;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="287" y="141" width="226" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-18" value="1: Template API" style="whiteSpace=wrap;strokeWidth=2;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="263" width="172" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-19" value="2: Webpage Storage" style="whiteSpace=wrap;strokeWidth=2;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="298" y="263" width="203" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-20" value="3: Export Module" style="whiteSpace=wrap;strokeWidth=2;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="562" y="263" width="182" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-21" value="4: File System" style="whiteSpace=wrap;strokeWidth=2;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="645" y="384" width="161" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-22" value="Input Data" style="curved=1;startArrow=none;endArrow=block;exitX=0.29;exitY=0.99;entryX=0.41;entryY=0.01;rounded=1;" edge="1" parent="1" source="LGWrkFn5_xd0h7N3ikzs-16" target="LGWrkFn5_xd0h7N3ikzs-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="352" y="105" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-23" value="Request Templates" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.88;entryX=0.32;entryY=-0.01;rounded=1;" edge="1" parent="1" source="LGWrkFn5_xd0h7N3ikzs-17" target="LGWrkFn5_xd0h7N3ikzs-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="28" y="226" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-24" value="Provide Templates" style="curved=1;startArrow=none;endArrow=block;exitX=0.68;exitY=-0.01;entryX=0.12;entryY=1;rounded=1;" edge="1" parent="1" source="LGWrkFn5_xd0h7N3ikzs-18" target="LGWrkFn5_xd0h7N3ikzs-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="185" y="226" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-25" value="Create Webpage" style="curved=1;startArrow=none;endArrow=block;exitX=0.38;exitY=1;entryX=0.37;entryY=-0.01;rounded=1;" edge="1" parent="1" source="LGWrkFn5_xd0h7N3ikzs-17" target="LGWrkFn5_xd0h7N3ikzs-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="333" y="226" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-26" value="Webpage Data" style="curved=1;startArrow=none;endArrow=block;exitX=0.63;exitY=-0.01;entryX=0.62;entryY=1;rounded=1;" edge="1" parent="1" source="LGWrkFn5_xd0h7N3ikzs-19" target="LGWrkFn5_xd0h7N3ikzs-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="467" y="226" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-27" value="Export Request" style="curved=1;startArrow=none;endArrow=block;exitX=0.95;exitY=1;entryX=0.5;entryY=-0.01;rounded=1;" edge="1" parent="1" source="LGWrkFn5_xd0h7N3ikzs-17" target="LGWrkFn5_xd0h7N3ikzs-20">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="653" y="226" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-28" value="Exported Files" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.32;entryY=0;rounded=1;" edge="1" parent="1" source="LGWrkFn5_xd0h7N3ikzs-20" target="LGWrkFn5_xd0h7N3ikzs-21">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="653" y="348" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-29" value="Files" style="curved=1;startArrow=none;endArrow=block;exitX=0.68;exitY=0;entryX=1;entryY=0.86;rounded=1;" edge="1" parent="1" source="LGWrkFn5_xd0h7N3ikzs-21" target="LGWrkFn5_xd0h7N3ikzs-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="797" y="348" />
+              <mxPoint x="797" y="226" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LGWrkFn5_xd0h7N3ikzs-30" value="Feedback" style="curved=1;startArrow=none;endArrow=block;exitX=0.58;exitY=0.01;entryX=0.71;entryY=0.99;rounded=1;" edge="1" parent="1" source="LGWrkFn5_xd0h7N3ikzs-17" target="LGWrkFn5_xd0h7N3ikzs-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="448" y="105" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
