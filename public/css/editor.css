@@ -1,0 +1,208 @@
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+    background-color: #f8f9fa;
+}
+
+.toolbar {
+    padding: 10px;
+    background-color: #fff;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tool-group {
+    display: flex;
+    gap: 5px;
+    padding: 0 5px;
+    border-right: 1px solid #dee2e6;
+}
+
+.tool-group:last-child {
+    border-right: none;
+}
+
+.tool-btn {
+    background: none;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tool-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+.tool-btn.active {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.font-family,
+.font-size {
+    padding: 5px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.color-picker,
+.bg-color-picker {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.editor-workspace {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.editor-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-right: 1px solid #dee2e6;
+    overflow-y: auto;
+}
+
+.preview-panel {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+.preview-panel h3 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.action-buttons {
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+/* 图片上传对话框 */
+.image-upload-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    width: 400px;
+}
+
+.image-upload-dialog h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.image-upload-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.image-upload-area:hover {
+    border-color: #007bff;
+}
+
+.image-upload-area i {
+    font-size: 48px;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.image-upload-area p {
+    margin: 0;
+    color: #6c757d;
+}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .editor-container {
+        flex-direction: column;
+    }
+    
+    .toolbar {
+        flex-direction: column;
+    }
+    
+    .editor-workspace {
+        flex-direction: column;
+    }
+    
+    .editor-content,
+    .preview-panel {
+        flex: none;
+        height: 50vh;
+    }
+    
+    .editor-content {
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+}

@@ -1,0 +1,84 @@
+<%- include('base', {
+    title: '文件管理 - 网页生成工具',
+    extraCss: '<link rel="stylesheet" href="/css/files.css">',
+    content: `
+        <div class="files-container">
+            <div class="files-sidebar">
+                <div class="sidebar-header">
+                    <h2>文件夹</h2>
+                    <button class="btn btn-sm btn-primary" id="newFolderBtn">
+                        <i class="fas fa-folder-plus"></i> 新建文件夹
+                    </button>
+                </div>
+                <div class="folder-tree" id="folderTree"></div>
+            </div>
+            
+            <div class="files-main">
+                <div class="files-toolbar">
+                    <div class="toolbar-left">
+                        <button class="btn btn-primary" id="newFileBtn">
+                            <i class="fas fa-file-plus"></i> 新建页面
+                        </button>
+                        <button class="btn btn-secondary" id="importBtn">
+                            <i class="fas fa-file-import"></i> 导入文件
+                        </button>
+                    </div>
+                    <div class="toolbar-right">
+                        <div class="search-box">
+                            <input type="text" placeholder="搜索文件..." id="searchInput">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="view-options">
+                            <button class="btn btn-icon" data-view="grid" title="网格视图">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="btn btn-icon" data-view="list" title="列表视图">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="files-content" id="filesContent">
+                    <!-- 文件列表将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 导入文件模态框 -->
+        <div class="modal" id="importModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>导入文件</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="import-options">
+                        <label class="import-option">
+                            <input type="radio" name="importType" value="word" checked>
+                            <span>Word文档 (.docx)</span>
+                        </label>
+                        <label class="import-option">
+                            <input type="radio" name="importType" value="pdf">
+                            <span>PDF文件 (.pdf)</span>
+                        </label>
+                        <label class="import-option">
+                            <input type="radio" name="importType" value="html">
+                            <span>HTML文件 (.html)</span>
+                        </label>
+                    </div>
+                    <div class="file-upload-area" id="fileUploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>拖放文件到这里或点击选择文件</p>
+                        <input type="file" id="fileInput" hidden>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button class="btn btn-primary" id="startImportBtn">开始导入</button>
+                </div>
+            </div>
+        </div>
+    `,
+    extraJs: '<script src="/js/files.js"></script>'
+}) %>

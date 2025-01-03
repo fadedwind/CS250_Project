@@ -1,0 +1,28 @@
+<%- include('base', {
+    title: '模板库 - 网页生成工具',
+    extraCss: '<link rel="stylesheet" href="/css/templates.css">',
+    content: `
+        <div class="templates-container">
+            <header class="templates-header">
+                <h1>选择模板</h1>
+                <p>从我们精心设计的模板中选择一个开始创建</p>
+            </header>
+            
+            <div class="templates-grid">
+                <% templates.forEach(template => { %>
+                    <div class="template-card" data-template-id="<%= template.id %>">
+                        <div class="template-preview">
+                            <img src="<%= template.thumbnail %>" alt="<%= template.name %>">
+                        </div>
+                        <div class="template-info">
+                            <h3><%= template.name %></h3>
+                            <p><%= template.description %></p>
+                            <button class="btn btn-primary use-template-btn">使用此模板</button>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    `,
+    extraJs: '<script src="/js/templates.js"></script>'
+}) %>
