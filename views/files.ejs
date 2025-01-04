@@ -3,12 +3,14 @@
     extraCss: '<link rel="stylesheet" href="/css/files.css">',
     content: `
         <div class="files-container">
+            <div class="files-sidebar">
+                <div class="file-tree" id="fileTree">
+                    <!-- 文件树将通过JavaScript动态加载 -->
+                </div>
+            </div>
             <div class="files-main">
                 <div class="files-toolbar">
                     <div class="toolbar-left">
-                        <button class="btn btn-primary" id="newFolderBtn">
-                            <i class="fas fa-folder-plus"></i> 新建文件夹
-                        </button>
                         <button class="btn btn-primary" id="newFileBtn">
                             <i class="fas fa-file-plus"></i> 新建页面
                         </button>
@@ -20,14 +22,6 @@
                         <div class="search-box">
                             <input type="text" placeholder="搜索文件..." id="searchInput">
                             <i class="fas fa-search"></i>
-                        </div>
-                        <div class="view-options">
-                            <button class="btn btn-icon" data-view="grid" title="网格视图">
-                                <i class="fas fa-th"></i>
-                            </button>
-                            <button class="btn btn-icon" data-view="list" title="列表视图">
-                                <i class="fas fa-list"></i>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -48,12 +42,8 @@
                 <div class="modal-body">
                     <div class="import-options">
                         <label class="import-option">
-                            <input type="radio" name="importType" value="word" checked>
-                            <span>Word文档 (.docx)</span>
-                        </label>
-                        <label class="import-option">
-                            <input type="radio" name="importType" value="pdf">
-                            <span>PDF文件 (.pdf)</span>
+                            <input type="radio" name="importType" value="txt" checked>
+                            <span>文本文件 (.txt)</span>
                         </label>
                         <label class="import-option">
                             <input type="radio" name="importType" value="html">

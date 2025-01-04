@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: webpage-generator
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+    disk:
+      name: user-files
+      mountPath: /user_files
+      sizeGB: 1

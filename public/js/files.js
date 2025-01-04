@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const startImportBtn = document.getElementById('startImportBtn');
     const fileUploadArea = document.getElementById('fileUploadArea');
     const viewOptions = document.querySelectorAll('.view-options button');
+    const fileTree = document.getElementById('fileTree');
 
     let currentPath = '';
     let currentView = 'grid';
@@ -192,27 +193,24 @@ document.addEventListener('DOMContentLoaded', function() {
         return row;
     }
 
-    // 新建文件夹
-    newFolderBtn.addEventListener('click', async () => {
-        const folderName = prompt('请输入文件夹名称:');
-        if (folderName) {
-            try {
-                const response = await fetch('/api/files/folder' + (currentPath ? currentPath + '/' : '/') + folderName, {
-                    method: 'POST'
-                });
-                if (!response.ok) throw new Error('创建文件夹失败');
-                loadFiles();
-                showNotification('文件夹已创建');
-            } catch (error) {
-                console.error('创建文件夹失败:', error);
-                showNotification('创建文件夹失败', 'error');
-            }
-        }
-    });
-
     // 新建文件
     newFileBtn.addEventListener('click', () => {
-        window.location.href = '/editor/new' + currentPath;
+        const fileName = prompt('请输入文件名:', '新文档.txt');
+        if (fileName) {
+            // 在Working Directory中创建新文件
+            fileSystem['Working Directory'].children[fileName] = {
+                type: 'file',
+                content: '',
+                lastModified: new Date().toISOString()
+            };
+            
+            // 保存文件系统
+            saveFileSystem();
+            
+            // 重新渲染文件树
+            fileTree.innerHTML = '';
+            renderFileTree(fileTree, fileSystem);
+        }
     });
 
     // 导入文件
@@ -328,6 +326,256 @@ document.addEventListener('DOMContentLoaded', function() {
         // 实现通知功能
     }
 
-    // 初始化
+    // 默认的文件系统结构
+    const defaultFileSystem = {
+        'Working Directory': {
+            type: 'folder',
+            children: {}
+        }
+    };
+
+    // 初始化文件系统
+    let fileSystem = null;
+
+    // 从localStorage加载文件系统
+    function loadFileSystem() {
+        const savedSystem = localStorage.getItem('fileSystem');
+        if (savedSystem) {
+            fileSystem = JSON.parse(savedSystem);
+        } else {
+            fileSystem = defaultFileSystem;
+            saveFileSystem();
+        }
+        renderFileTree(fileTree, fileSystem);
+    }
+
+    // 保存文件系统到localStorage
+    function saveFileSystem() {
+        localStorage.setItem('fileSystem', JSON.stringify(fileSystem));
+    }
+
+    // 渲染文件树
+    function renderFileTree(container, data, path = '') {
+        for (const [name, item] of Object.entries(data)) {
+            const itemPath = path ? `${path}/${name}` : name;
+            const itemElement = document.createElement('div');
+            itemElement.className = 'tree-item';
+            itemElement.dataset.path = itemPath;
+
+            // 添加展开/折叠图标
+            if (item.type === 'folder') {
+                const toggle = document.createElement('span');
+                toggle.className = 'tree-toggle';
+                toggle.innerHTML = '▶';
+                itemElement.appendChild(toggle);
+            }
+
+            // 添加图标
+            const icon = document.createElement('i');
+            icon.className = `fas ${item.type === 'folder' ? 'fa-folder' : 'fa-file'}`;
+            itemElement.appendChild(icon);
+
+            // 添加名称
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'tree-item-name';
+            nameSpan.contentEditable = true;
+            nameSpan.textContent = name;
+            itemElement.appendChild(nameSpan);
+
+            // 添加操作按钮容器（除了根目录）
+            if (name !== 'Working Directory') {
+                const actions = document.createElement('div');
+                actions.className = 'tree-item-actions';
+
+                // 添加删除按钮
+                const deleteBtn = document.createElement('button');
+                deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteBtn.title = '删除';
+                actions.appendChild(deleteBtn);
+                itemElement.appendChild(actions);
+
+                // 删除处理
+                deleteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (confirm(`确定要删除${item.type === 'folder' ? '文件夹' : '文件'} "${name}" 吗？`)) {
+                        // 从DOM中移除
+                        if (item.type === 'folder') {
+                            itemElement.nextElementSibling?.remove(); // 移除子容器
+                        }
+                        itemElement.remove();
+                        
+                        // 从数据结构中移除
+                        const pathParts = itemPath.split('/');
+                        let current = fileSystem;
+                        for (let i = 0; i < pathParts.length - 1; i++) {
+                            current = current[pathParts[i]].children;
+                        }
+                        delete current[pathParts[pathParts.length - 1]];
+                        saveFileSystem();
+                    }
+                });
+            }
+
+            container.appendChild(itemElement);
+
+            if (item.type === 'folder') {
+                const childrenContainer = document.createElement('div');
+                childrenContainer.className = 'tree-children';
+                childrenContainer.style.display = 'none';
+                container.appendChild(childrenContainer);
+
+                // 展开/折叠处理
+                const toggle = itemElement.querySelector('.tree-toggle');
+                toggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isExpanded = toggle.innerHTML === '▼';
+                    toggle.innerHTML = isExpanded ? '▶' : '▼';
+                    childrenContainer.style.display = isExpanded ? 'none' : 'block';
+                });
+
+                renderFileTree(childrenContainer, item.children, itemPath);
+            }
+
+            // 重命名处理
+            nameSpan.addEventListener('blur', () => {
+                const newName = nameSpan.textContent.trim();
+                if (newName !== name) {
+                    // 这里可以添加重命名的后端API调用
+                    console.log(`重命名 ${name} 为 ${newName}`);
+                    const pathParts = itemPath.split('/');
+                    let current = fileSystem;
+                    for (let i = 0; i < pathParts.length - 1; i++) {
+                        current = current[pathParts[i]].children;
+                    }
+                    current[newName] = current[name];
+                    delete current[name];
+                    saveFileSystem();
+                }
+            });
+
+            // 选择处理
+            itemElement.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (item.type === 'folder') {
+                    // 如果是文件夹，选中它
+                    document.querySelectorAll('.tree-item').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    itemElement.classList.add('selected');
+                    currentPath = itemPath;
+                } else {
+                    // 如果是文件，跳转到编辑器
+                    console.log('点击文件:', name);
+                    console.log('文件路径:', itemPath);
+                    console.log('文件内容:', item.content);
+                    // 跳转到编辑器并传递文件内容
+                    const params = new URLSearchParams();
+                    params.append('content', item.content || '');
+                    params.append('filename', name);
+                    window.location.href = '/editor?' + params.toString();
+                }
+            });
+        }
+    }
+
+    // 导入文件按钮点击事件
+    importBtn.addEventListener('click', () => {
+        const modal = document.getElementById('importModal');
+        modal.style.display = 'block';
+    });
+
+    // 开始导入按钮点击事件
+    startImportBtn.addEventListener('click', () => {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                let content = e.target.result;
+                
+                // 如果是HTML文件，提取纯文本内容
+                if (file.name.toLowerCase().endsWith('.html')) {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = content;
+                    
+                    // 移除所有script标签
+                    const scripts = tempDiv.getElementsByTagName('script');
+                    for (let i = scripts.length - 1; i >= 0; i--) {
+                        scripts[i].remove();
+                    }
+                    
+                    // 移除所有style标签
+                    const styles = tempDiv.getElementsByTagName('style');
+                    for (let i = styles.length - 1; i >= 0; i--) {
+                        styles[i].remove();
+                    }
+                    
+                    // 获取纯文本内容
+                    content = tempDiv.textContent || tempDiv.innerText;
+                }
+                
+                // 保存文件
+                const fileName = file.name;
+                fileSystem['Working Directory'].children[fileName] = {
+                    type: 'file',
+                    content: content,
+                    lastModified: new Date().toISOString()
+                };
+                
+                // 保存文件系统并更新显示
+                saveFileSystem();
+                renderFileTree(fileTree, fileSystem);
+                
+                // 关闭模态框
+                const modal = document.getElementById('importModal');
+                modal.style.display = 'none';
+                
+                // 清空文件输入
+                fileInput.value = '';
+            };
+            reader.readAsText(file);
+        }
+    });
+
+    // 文件上传区域点击处理
+    fileUploadArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    // 检查URL参数中是否有要保存的内容
+    const urlParams = new URLSearchParams(window.location.search);
+    const content = urlParams.get('content');
+    if (content) {
+        const fileName = prompt('请输入文件名:', '新文档.txt');
+        if (fileName) {
+            // 确保文件系统已正确加载
+            const savedSystem = localStorage.getItem('fileSystem');
+            if (savedSystem) {
+                fileSystem = JSON.parse(savedSystem);
+            } else {
+                fileSystem = defaultFileSystem;
+            }
+            
+            // 添加文件到当前目录
+            let current = fileSystem['Working Directory'].children;
+            
+            // 添加文件
+            current[fileName] = {
+                type: 'file',
+                content: content,
+                lastModified: new Date().toISOString()
+            };
+            
+            // 保存文件系统
+            saveFileSystem();
+            
+            // 刷新页面而不是重新渲染
+            window.location.href = '/files';
+            return;
+        }
+    }
+
+    // 初始化时加载文件系统
+    loadFileSystem();
     loadFiles();
 });

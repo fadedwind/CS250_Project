@@ -104,11 +104,22 @@ body {
 }
 
 .preview-panel {
-    width: 40%;
+    flex: 1;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
     background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.preview-content {
+    padding: 20px;
+    font-size: 0.85em;
+    line-height: 1.4;
+    overflow-y: auto;
+    height: calc(100% - 40px);
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .bottom-panel {

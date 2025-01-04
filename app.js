@@ -10,10 +10,11 @@ const fs = require('fs');
 const fileRoutes = require('./routes/files');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // 初始化文件系统
-const fileSystem = new FileSystem(path.join(__dirname, 'user_files'));
+const userFilesPath = process.env.STORAGE_PATH || path.join(__dirname, 'user_files');
+const fileSystem = new FileSystem(userFilesPath);
 
 // 配置模板引擎
 app.set('view engine', 'ejs');

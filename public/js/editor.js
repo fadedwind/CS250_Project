@@ -253,33 +253,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 保存功能
-    saveBtn.addEventListener('click', async function() {
+    saveBtn.addEventListener('click', function() {
         const content = editor.innerHTML;
-        const styles = Array.from(document.styleSheets)
-            .filter(sheet => !sheet.href) // 只获取内联样式
-            .map(sheet => Array.from(sheet.cssRules)
-                .map(rule => rule.cssText)
-                .join('\n'))
-            .join('\n');
-
-        try {
-            const response = await fetch('/api/save', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ content, styles })
-            });
-            
-            if (response.ok) {
-                alert('内容已保存！');
-            } else {
-                throw new Error('保存失败');
-            }
-        } catch (error) {
-            console.error('保存失败:', error);
-            alert('保存失败，请重试！');
-        }
+        
+        // 将内容通过URL参数传递到文件管理页面
+        const params = new URLSearchParams({
+            content: content
+        });
+        window.location.href = `/files?${params.toString()}`;
     });
 
     // 导出功能

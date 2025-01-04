@@ -67,16 +67,27 @@
                 </div>
             </div>
 
-
-                <div class="action-buttons">
-                    <button class="btn btn-primary" id="saveBtn">保存</button>
-                    <button class="btn btn-secondary" id="exportBtn">导出</button>
-                </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="saveBtn">保存</button>
+                <button class="btn btn-secondary" id="exportBtn">导出</button>
             </div>
         </div>
     `,
     extraJs: `
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="/js/editor.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const content = urlParams.get('content');
+                
+                if (content) {
+                    // 将导入的内容设置到编辑器中
+                    document.querySelector('.editor-content').innerHTML = decodeURIComponent(content);
+                    // 同步更新预览
+                    document.querySelector('.preview-content').innerHTML = decodeURIComponent(content);
+                }
+            });
+        </script>
     `
 }) %>
