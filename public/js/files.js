@@ -484,61 +484,45 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.style.display = 'block';
     });
 
-    // 开始导入按钮点击事件
-    startImportBtn.addEventListener('click', () => {
-        const fileInput = document.getElementById('fileInput');
-        const file = fileInput.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                let content = e.target.result;
-                
-                // 如果是HTML文件，提取纯文本内容
-                if (file.name.toLowerCase().endsWith('.html')) {
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = content;
-                    
-                    // 移除所有script标签
-                    const scripts = tempDiv.getElementsByTagName('script');
-                    for (let i = scripts.length - 1; i >= 0; i--) {
-                        scripts[i].remove();
-                    }
-                    
-                    // 移除所有style标签
-                    const styles = tempDiv.getElementsByTagName('style');
-                    for (let i = styles.length - 1; i >= 0; i--) {
-                        styles[i].remove();
-                    }
-                    
-                    // 获取纯文本内容
-                    content = tempDiv.textContent || tempDiv.innerText;
-                }
-                
-                // 保存文件
-                const fileName = file.name;
-                fileSystem['Working Directory'].children[fileName] = {
-                    type: 'file',
-                    content: content,
-                    lastModified: new Date().toISOString()
-                };
-                
-                // 保存文件系统并更新显示
-                saveFileSystem();
-                renderFileTree(fileTree, fileSystem);
-                
-                // 关闭模态框
-                const modal = document.getElementById('importModal');
-                modal.style.display = 'none';
-                
-                // 清空文件输入
-                fileInput.value = '';
-            };
-            reader.readAsText(file);
+    // 关闭模态框
+    document.querySelector('.close-btn').addEventListener('click', () => {
+        document.getElementById('importModal').style.display = 'none';
+    });
+
+    // 文件选择处理
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const importType = document.querySelector('input[name="importType"]:checked').value;
+        
+        // 验证文件类型
+        if (importType === 'txt' && !file.name.toLowerCase().endsWith('.txt')) {
+            alert('请选择.txt文件');
+            return;
+        } else if (importType === 'html' && !file.name.toLowerCase().endsWith('.html')) {
+            alert('请选择.html文件');
+            return;
         }
+
+        // 读取文件内容
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // 获取文件内容
+            const content = e.target.result;
+            // 跳转到编辑器页面并传递内容
+            window.location.href = `/editor?content=${encodeURIComponent(content)}`;
+        };
+        reader.readAsText(file);
     });
 
     // 文件上传区域点击处理
     fileUploadArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    // 开始导入按钮点击事件
+    document.getElementById('startImportBtn').addEventListener('click', () => {
         fileInput.click();
     });
 
