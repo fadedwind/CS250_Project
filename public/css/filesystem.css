@@ -1,0 +1,163 @@
+.filesystem-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.filesystem-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: white;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header-left h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #212529;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #495057;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.nav-link:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.header-right {
+    display: flex;
+    gap: 1rem;
+}
+
+.filesystem-content {
+    flex: 1;
+    padding: 1rem;
+    overflow: auto;
+}
+
+.path-navigator {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 4px;
+    color: #495057;
+}
+
+.file-list {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.file-list-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 100px;
+    padding: 0.75rem 1rem;
+    background: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: bold;
+    color: #495057;
+}
+
+.file-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 100px;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    align-items: center;
+}
+
+.file-item:hover {
+    background-color: #f8f9fa;
+}
+
+.file-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.file-name i {
+    font-size: 1.2rem;
+}
+
+.file-name i.fa-folder {
+    color: #ffd700;
+}
+
+.file-name i.fa-file {
+    color: #6c757d;
+}
+
+.file-name i.fa-file-image {
+    color: #28a745;
+}
+
+.file-name span {
+    cursor: pointer;
+}
+
+.file-size {
+    color: #6c757d;
+}
+
+.file-modified {
+    color: #6c757d;
+}
+
+.file-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.file-actions button {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    transition: opacity 0.2s;
+}
+
+.file-actions button:hover {
+    opacity: 0.8;
+}
+
+.file-actions .delete-btn {
+    background-color: #dc3545;
+}
+
+.file-actions .use-btn {
+    background-color: #28a745;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .file-list-header,
+    .file-item {
+        grid-template-columns: 2fr 1fr 100px;
+    }
+
+    .file-modified {
+        display: none;
+    }
+}

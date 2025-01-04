@@ -6,6 +6,8 @@ const mammoth = require('mammoth');
 const pdf = require('pdf-parse');
 const templates = require('./data/templates');
 const FileSystem = require('./models/FileSystem');
+const fs = require('fs');
+const fileRoutes = require('./routes/files');
 
 const app = express();
 const port = 3000;
@@ -67,6 +69,10 @@ app.get('/templates', (req, res) => {
     res.render('templates', { templates });
 });
 
+app.get('/filesystem', (req, res) => {
+    res.render('filesystem');
+});
+
 app.get('/files', (req, res) => {
     res.render('files');
 });
@@ -74,10 +80,12 @@ app.get('/files', (req, res) => {
 // 文件管理API
 app.get('/api/files/tree', async (req, res) => {
     try {
+        const fileSystem = new FileSystem(uploadDir);
         const tree = await fileSystem.getDirectoryStructure();
         res.json(tree);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to get directory structure' });
+        console.error('获取文件树失败:', error);
+        res.status(500).json({ error: '获取文件树失败' });
     }
 });
 
@@ -118,6 +126,30 @@ app.delete('/api/files', async (req, res) => {
         res.json(result);
     } catch (error) {
         res.status(500).json({ error: 'Failed to delete file' });
+    }
+});
+
+app.delete('/api/files/*', async (req, res) => {
+    try {
+        const relativePath = req.params[0];
+        const fileSystem = new FileSystem(uploadDir);
+        await fileSystem.delete(relativePath);
+        res.json({ success: true });
+    } catch (error) {
+        console.error('删除文件/文件夹失败:', error);
+        res.status(500).json({ error: '删除文件/文件夹失败' });
+    }
+});
+
+// 创建文件夹的API
+app.post('/api/files/folder', async (req, res) => {
+    const { name } = req.body;
+    const folderPath = path.join(__dirname, 'user_files', name);
+    try {
+        await fs.promises.mkdir(folderPath);
+        res.json({ success: true });
+    } catch (error) {
+        res.status(500).json({ error: '创建文件夹失败' });
     }
 });
 
@@ -194,6 +226,9 @@ app.post('/api/save', async (req, res) => {
         res.status(500).json({ error: 'Failed to save file' });
     }
 });
+
+// 文件管理路由
+app.use('/api/files', fileRoutes);
 
 // 错误处理中间件
 app.use((err, req, res, next) => {

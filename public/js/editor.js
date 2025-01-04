@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const bgColorPicker = document.querySelector('.bg-color-picker');
     const saveBtn = document.getElementById('saveBtn');
     const exportBtn = document.getElementById('exportBtn');
+    const createFolderBtn = document.getElementById('create-folder-btn');
+    const uploadBtn = document.getElementById('upload-file-btn');
+    const fileInput = document.getElementById('file-input');
 
     // 检查是否有选择的模板
     const selectedTemplate = localStorage.getItem('selectedTemplate');
@@ -311,6 +314,151 @@ document.addEventListener('DOMContentLoaded', function() {
         a.download = 'document.html';
         a.click();
         URL.revokeObjectURL(url);
+    });
+
+    // 文件管理功能
+    uploadBtn.addEventListener('click', function() {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function() {
+        const files = this.files;
+        if (files.length > 0) {
+            uploadFiles(files);
+        }
+    });
+
+    // 加载文件列表
+    loadFiles();
+
+    // 上传文件
+    function uploadFiles(files) {
+        const formData = new FormData();
+        for (let file of files) {
+            formData.append('file', file);
+        }
+
+        fetch('/api/files/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('文件上传成功:', data);
+            loadFiles(); // 重新加载文件列表
+        })
+        .catch(error => {
+            console.error('文件上传失败:', error);
+            alert('文件上传失败，请重试');
+        });
+    }
+
+    // 加载文件列表
+    function loadFiles() {
+        fetch('/api/files')
+            .then(response => response.json())
+            .then(files => {
+                const fileList = document.getElementById('file-list');
+                fileList.innerHTML = '';
+                
+                files.forEach(file => {
+                    const li = document.createElement('li');
+                    li.className = 'file-item';
+                    
+                    // 创建图标
+                    const icon = document.createElement('i');
+                    if (file.isDirectory) {
+                        icon.className = 'fas fa-folder';
+                    } else if (file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+                        icon.className = 'fas fa-file-image';
+                    } else {
+                        icon.className = 'fas fa-file';
+                    }
+                    
+                    // 创建文件名
+                    const name = document.createElement('span');
+                    name.textContent = file.name;
+                    
+                    // 创建操作按钮容器
+                    const actions = document.createElement('div');
+                    actions.className = 'file-actions';
+                    
+                    // 删除按钮
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'delete-btn';
+                    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                    deleteBtn.onclick = () => deleteFile(file.name);
+                    
+                    // 添加到DOM
+                    li.appendChild(icon);
+                    li.appendChild(name);
+                    actions.appendChild(deleteBtn);
+                    
+                    // 如果是图片，添加使用按钮
+                    if (!file.isDirectory && file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+                        const useBtn = document.createElement('button');
+                        useBtn.className = 'use-btn';
+                        useBtn.innerHTML = '<i class="fas fa-plus"></i>';
+                        useBtn.onclick = () => useFile(file.path);
+                        actions.appendChild(useBtn);
+                    }
+                    
+                    li.appendChild(actions);
+                    fileList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error('加载文件列表失败:', error);
+            });
+    }
+
+    // 删除文件
+    function deleteFile(fileName) {
+        if (confirm(`确定要删除 ${fileName} 吗？`)) {
+            fetch(`/api/files/${fileName}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(() => {
+                loadFiles(); // 重新加载文件列表
+            })
+            .catch(error => {
+                console.error('删除文件失败:', error);
+                alert('删除文件失败，请重试');
+            });
+        }
+    }
+
+    // 使用文件（插入到编辑器）
+    function useFile(filePath) {
+        const editor = document.querySelector('.editor-content');
+        if (filePath.match(/\.(jpg|jpeg|png|gif)$/i)) {
+            const img = document.createElement('img');
+            img.src = filePath;
+            editor.appendChild(img);
+        }
+    }
+
+    // 创建文件夹
+    createFolderBtn.addEventListener('click', function() {
+        const folderName = prompt('请输入文件夹名称：');
+        if (folderName) {
+            fetch('/api/files/folder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: folderName })
+            })
+            .then(response => response.json())
+            .then(() => {
+                loadFiles(); // 重新加载文件列表
+            })
+            .catch(error => {
+                console.error('创建文件夹失败:', error);
+                alert('创建文件夹失败，请重试！');
+            });
+        }
     });
 
     // 初始化工具栏状态
