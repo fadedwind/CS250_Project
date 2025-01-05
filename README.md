@@ -1,4 +1,4 @@
-# Online Rich Text Editor
+# Web Page Generator
 
 A powerful online rich text editor with file management, text editing, and image upload capabilities.
 [Playground](https://webtookit-production.up.railway.app/)
