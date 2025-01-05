@@ -8,37 +8,31 @@ A powerful online rich text editor with file management, text editing, and image
 - File List Display
   - Support for grid and list view switching
   - Display filename, size, and modification time
-  [Insert file management interface screenshot here]
 
 - File Operations
   - Create new files
   - Import files (supports TXT and HTML)
   - Delete files
-  [Insert file operations interface screenshot here]
 
 ### 2. Rich Text Editor
 - Text Editing Features
   - Font styles (bold, italic, underline)
   - Font size and color adjustment
   - Text alignment
-  [Insert editor features screenshot here]
 
 - Image Handling
   - Image upload (supports drag & drop and click upload)
   - Image size adjustment
   - Image position adjustment
-  [Insert image upload feature screenshot here]
 
 ### 3. Import/Export Features
 - File Import
   - Support for TXT file import
   - Support for HTML file import (automatic text content extraction)
-  [Insert import feature screenshot here]
 
 - File Export
   - Export to HTML format
   - Preserve complete styles and images
-  [Insert export feature screenshot here]
 
 ## Tech Stack
 - Frontend
@@ -116,6 +110,3 @@ Welcome to submit Issues and Pull Requests. Before submitting PR, please ensure:
 2. New features have proper test coverage
 3. All tests pass
 4. Relevant documentation is updated
-
-## License
-MIT License
