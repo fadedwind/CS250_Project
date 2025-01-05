@@ -563,3 +563,19 @@ document.addEventListener('DOMContentLoaded', function() {
     loadFileSystem();
     loadFiles();
 });
+
+// Alert messages
+const messages = {
+    deleteConfirm: 'Are you sure you want to delete this file?',
+    deleteSuccess: 'File deleted successfully',
+    deleteError: 'Error deleting file',
+    createSuccess: 'File created successfully',
+    createError: 'Error creating file',
+    importSuccess: 'File imported successfully',
+    importError: 'Error importing file',
+    invalidFileName: 'Please enter a valid file name',
+    fileExists: 'File already exists',
+    noFileSelected: 'Please select a file to import',
+    invalidFileType: 'Invalid file type. Please select a valid file.',
+    fileSizeLimit: 'File size exceeds the limit'
+};

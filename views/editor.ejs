@@ -1,26 +1,26 @@
 <%- include('base', {
-    title: '编辑器 - 网页生成工具',
+    title: 'Editor - Web Page Generator',
     extraCss: '<link rel="stylesheet" href="/css/editor.css">',
     content: `
         <div class="editor-container">
             <div class="toolbar">
                 <div class="tool-group">
-                    <button class="tool-btn" data-command="bold" title="加粗"><i class="fas fa-bold"></i></button>
-                    <button class="tool-btn" data-command="italic" title="斜体"><i class="fas fa-italic"></i></button>
-                    <button class="tool-btn" data-command="underline" title="下划线"><i class="fas fa-underline"></i></button>
-                    <button class="tool-btn" data-command="strikethrough" title="删除线"><i class="fas fa-strikethrough"></i></button>
+                    <button class="tool-btn" data-command="bold" title="Bold"><i class="fas fa-bold"></i></button>
+                    <button class="tool-btn" data-command="italic" title="Italic"><i class="fas fa-italic"></i></button>
+                    <button class="tool-btn" data-command="underline" title="Underline"><i class="fas fa-underline"></i></button>
+                    <button class="tool-btn" data-command="strikethrough" title="Strikethrough"><i class="fas fa-strikethrough"></i></button>
                 </div>
                 <div class="tool-group">
                     <select class="font-family">
-                        <option value="default">字体</option>
+                        <option value="default">Font</option>
                         <option value="Arial">Arial</option>
                         <option value="Times New Roman">Times New Roman</option>
-                        <option value="微软雅黑">微软雅黑</option>
-                        <option value="宋体">宋体</option>
-                        <option value="黑体">黑体</option>
+                        <option value="Microsoft YaHei">Microsoft YaHei</option>
+                        <option value="SimSun">SimSun</option>
+                        <option value="SimHei">SimHei</option>
                     </select>
                     <select class="font-size">
-                        <option value="default">字号</option>
+                        <option value="default">Size</option>
                         <option value="1">12px</option>
                         <option value="2">14px</option>
                         <option value="3">16px</option>
@@ -31,42 +31,42 @@
                     </select>
                 </div>
                 <div class="tool-group">
-                    <input type="color" class="color-picker" title="文字颜色">
-                    <input type="color" class="bg-color-picker" title="背景颜色" value="#ffffff">
+                    <input type="color" class="color-picker" title="Text Color">
+                    <input type="color" class="bg-color-picker" title="Background Color" value="#ffffff">
                 </div>
                 <div class="tool-group">
-                    <button class="tool-btn" data-command="justifyLeft" title="左对齐"><i class="fas fa-align-left"></i></button>
-                    <button class="tool-btn" data-command="justifyCenter" title="居中对齐"><i class="fas fa-align-center"></i></button>
-                    <button class="tool-btn" data-command="justifyRight" title="右对齐"><i class="fas fa-align-right"></i></button>
-                    <button class="tool-btn" data-command="justifyFull" title="两端对齐"><i class="fas fa-align-justify"></i></button>
+                    <button class="tool-btn" data-command="justifyLeft" title="Align Left"><i class="fas fa-align-left"></i></button>
+                    <button class="tool-btn" data-command="justifyCenter" title="Align Center"><i class="fas fa-align-center"></i></button>
+                    <button class="tool-btn" data-command="justifyRight" title="Align Right"><i class="fas fa-align-right"></i></button>
+                    <button class="tool-btn" data-command="justifyFull" title="Justify"><i class="fas fa-align-justify"></i></button>
                 </div>
                 <div class="tool-group">
-                    <button class="tool-btn" data-command="insertOrderedList" title="有序列表"><i class="fas fa-list-ol"></i></button>
-                    <button class="tool-btn" data-command="insertUnorderedList" title="无序列表"><i class="fas fa-list-ul"></i></button>
-                    <button class="tool-btn" data-command="indent" title="增加缩进"><i class="fas fa-indent"></i></button>
-                    <button class="tool-btn" data-command="outdent" title="减少缩进"><i class="fas fa-outdent"></i></button>
+                    <button class="tool-btn" data-command="insertOrderedList" title="Ordered List"><i class="fas fa-list-ol"></i></button>
+                    <button class="tool-btn" data-command="insertUnorderedList" title="Unordered List"><i class="fas fa-list-ul"></i></button>
+                    <button class="tool-btn" data-command="indent" title="Increase Indent"><i class="fas fa-indent"></i></button>
+                    <button class="tool-btn" data-command="outdent" title="Decrease Indent"><i class="fas fa-outdent"></i></button>
                 </div>
                 <div class="tool-group">
-                    <button class="tool-btn" data-command="insertImage" title="插入图片"><i class="fas fa-image"></i></button>
-                    <button class="tool-btn" data-command="createLink" title="插入链接"><i class="fas fa-link"></i></button>
-                    <button class="tool-btn" data-command="unlink" title="移除链接"><i class="fas fa-unlink"></i></button>
+                    <button class="tool-btn" data-command="insertImage" title="Insert Image"><i class="fas fa-image"></i></button>
+                    <button class="tool-btn" data-command="createLink" title="Insert Link"><i class="fas fa-link"></i></button>
+                    <button class="tool-btn" data-command="unlink" title="Remove Link"><i class="fas fa-unlink"></i></button>
                 </div>
             </div>
 
             <div class="editor-workspace">
                 <div class="editor-content" contenteditable="true">
-                    <h1>开始编辑您的内容</h1>
-                    <p>在这里输入您的文字...</p>
+                    <h1>Start Editing Your Content</h1>
+                    <p>Enter your text here...</p>
                 </div>
                 <div class="preview-panel">
-                    <h3>实时预览</h3>
+                    <h3>Live Preview</h3>
                     <div class="preview-content"></div>
                 </div>
             </div>
 
             <div class="action-buttons">
-                <button class="btn btn-primary" id="saveBtn">保存</button>
-                <button class="btn btn-secondary" id="exportBtn">导出</button>
+                <button class="btn btn-primary" id="saveBtn">Save</button>
+                <button class="btn btn-secondary" id="exportBtn">Export</button>
             </div>
         </div>
     `,

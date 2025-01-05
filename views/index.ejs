@@ -1,26 +1,38 @@
 <%- include('base', {
-    title: '首页 - 网页生成工具',
+    title: 'Web Page Generator',
+    extraCss: '<link rel="stylesheet" href="/css/style.css">',
     content: `
         <div class="hero">
-            <h1>欢迎使用网页生成工具</h1>
-            <p>轻松创建精美的博客和论坛页面，无需编写代码</p>
-            <div class="cta-buttons">
-                <a href="/editor" class="btn btn-primary">开始创建</a>
-            </div>
+            <h1>Welcome to Web Page Generator</h1>
+            <p>Create beautiful blogs and forum pages effortlessly - no coding required</p>
+            <button onclick="window.location.href='/editor'" class="btn btn-primary">Start Creating</button>
         </div>
 
-        <section class="features">
-            <h2>主要功能</h2>
+        <div class="features">
+            <h2>Key Features</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h3>简单易用</h3>
-                    <p>直观的界面设计，无需编程经验</p>
+                    <i class="fas fa-magic"></i>
+                    <h3>Easy to Use</h3>
+                    <p>Intuitive interface design, no programming experience needed</p>
                 </div>
                 <div class="feature-card">
-                    <h3>实时预览</h3>
-                    <p>所见即所得的编辑体验</p>
+                    <i class="fas fa-eye"></i>
+                    <h3>Real-time Preview</h3>
+                    <p>WYSIWYG editing experience - see changes as you make them</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-folder"></i>
+                    <h3>File Management</h3>
+                    <p>Organize and manage your files efficiently with our built-in file system</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-save"></i>
+                    <h3>Auto Save</h3>
+                    <p>Never lose your work with automatic file saving and version control</p>
                 </div>
             </div>
-        </section>
-    `
+        </div>
+    `,
+    extraJs: ''
 }) %>

@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= typeof title !== 'undefined' ? title : '网页生成工具' %></title>
+    <title><%= typeof title !== 'undefined' ? title : 'Web Page Generator' %></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <%- typeof extraCss !== 'undefined' ? extraCss : '' %>
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-brand">网页生成工具</div>
+        <div class="nav-brand">Web Page Generator</div>
         <ul class="nav-links">
-            <li><a href="/">首页</a></li>
-            <li><a href="/editor">编辑器</a></li>
-            <li><a href="/files">文件管理</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/editor">Editor</a></li>
+            <li><a href="/files">Files</a></li>
         </ul>
     </nav>
 
     <main class="container">
         <%- typeof content !== 'undefined' ? content : '' %>
     </main>
+    <br><br>
+
+    <footer class="footer">
+        <p>&copy; 2024 Web Page Generator. All rights reserved.</p>
+    </footer>
 
     <script src="/js/main.js"></script>
     <%- typeof extraJs !== 'undefined' ? extraJs : '' %>

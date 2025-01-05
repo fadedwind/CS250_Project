@@ -1,5 +1,5 @@
 <%- include('base', {
-    title: '文件管理 - 网页生成工具',
+    title: 'File Management - Web Page Generator',
     extraCss: '<link rel="stylesheet" href="/css/files.css">',
     content: `
         <div class="files-container">
@@ -12,15 +12,15 @@
                 <div class="files-toolbar">
                     <div class="toolbar-left">
                         <button class="btn btn-primary" id="newFileBtn">
-                            <i class="fas fa-file-plus"></i> 新建页面
+                            <i class="fas fa-file-plus"></i> New File
                         </button>
                         <button class="btn btn-secondary" id="importBtn">
-                            <i class="fas fa-file-import"></i> 导入文件
+                            <i class="fas fa-file-import"></i> Import
                         </button>
                     </div>
                     <div class="toolbar-right">
                         <div class="search-box">
-                            <input type="text" placeholder="搜索文件..." id="searchInput">
+                            <input type="text" placeholder="Search files..." id="searchInput">
                             <i class="fas fa-search"></i>
                         </div>
                     </div>
@@ -36,29 +36,29 @@
         <div class="modal" id="importModal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>导入文件</h3>
+                    <h3>Import File</h3>
                     <button class="close-btn">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="import-options">
                         <label class="import-option">
                             <input type="radio" name="importType" value="txt" checked>
-                            <span>文本文件 (.txt)</span>
+                            <span>Text File (.txt)</span>
                         </label>
                         <label class="import-option">
                             <input type="radio" name="importType" value="html">
-                            <span>HTML文件 (.html)</span>
+                            <span>HTML File (.html)</span>
                         </label>
                     </div>
                     <div class="file-upload-area" id="fileUploadArea">
                         <i class="fas fa-cloud-upload-alt"></i>
-                        <p>拖放文件到这里或点击选择文件</p>
+                        <p>Drag & drop file here or click to select file</p>
                         <input type="file" id="fileInput" hidden>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" data-dismiss="modal">取消</button>
-                    <button class="btn btn-primary" id="startImportBtn">开始导入</button>
+                    <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" id="startImportBtn">Start Import</button>
                 </div>
             </div>
         </div>
