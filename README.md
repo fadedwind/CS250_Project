@@ -1,121 +1,121 @@
-# 在线富文本编辑器
+# Online Rich Text Editor
 
-一个功能强大的在线富文本编辑器，支持文件管理、文本编辑、图片上传等功能。
+A powerful online rich text editor with file management, text editing, and image upload capabilities.
 
-## 功能特点
+## Features
 
-### 1. 文件管理系统
-- 文件列表显示
-  - 支持网格视图和列表视图切换
-  - 显示文件名、大小和修改时间
-  [在此插入文件管理界面截图]
+### 1. File Management System
+- File List Display
+  - Support for grid and list view switching
+  - Display filename, size, and modification time
+  [Insert file management interface screenshot here]
 
-- 文件操作
-  - 新建文件
-  - 导入文件（支持 TXT 和 HTML）
-  - 删除文件
-  [在此插入文件操作界面截图]
+- File Operations
+  - Create new files
+  - Import files (supports TXT and HTML)
+  - Delete files
+  [Insert file operations interface screenshot here]
 
-### 2. 富文本编辑器
-- 文本编辑功能
-  - 字体样式（粗体、斜体、下划线）
-  - 字体大小和颜色调整
-  - 文本对齐方式
-  [在此插入编辑器功能截图]
+### 2. Rich Text Editor
+- Text Editing Features
+  - Font styles (bold, italic, underline)
+  - Font size and color adjustment
+  - Text alignment
+  [Insert editor features screenshot here]
 
-- 图片处理
-  - 图片上传（支持拖放和点击上传）
-  - 图片大小调整
-  - 图片位置调整
-  [在此插入图片上传功能截图]
+- Image Handling
+  - Image upload (supports drag & drop and click upload)
+  - Image size adjustment
+  - Image position adjustment
+  [Insert image upload feature screenshot here]
 
-### 3. 导入导出功能
-- 文件导入
-  - 支持 TXT 文件导入
-  - 支持 HTML 文件导入（自动提取文本内容）
-  [在此插入导入功能截图]
+### 3. Import/Export Features
+- File Import
+  - Support for TXT file import
+  - Support for HTML file import (automatic text content extraction)
+  [Insert import feature screenshot here]
 
-- 文件导出
-  - 导出为 HTML 格式
-  - 保留完整样式和图片
-  [在此插入导出功能截图]
+- File Export
+  - Export to HTML format
+  - Preserve complete styles and images
+  [Insert export feature screenshot here]
 
-## 技术栈
-- 前端
+## Tech Stack
+- Frontend
   - HTML5
   - CSS3
-  - JavaScript (原生)
-  - EJS 模板引擎
+  - JavaScript (Vanilla)
+  - EJS Template Engine
 
-- 后端
+- Backend
   - Node.js
   - Express.js
-  - Multer (文件上传)
+  - Multer (File Upload)
 
-## 安装说明
+## Installation Guide
 
-1. 克隆仓库
+1. Clone Repository
 ```bash
 git clone https://github.com/your-username/your-repo.git
 ```
 
-2. 安装依赖
+2. Install Dependencies
 ```bash
 cd your-repo
 npm install
 ```
 
-3. 启动服务器
+3. Start Server
 ```bash
 npm start
 ```
 
-4. 访问应用
-打开浏览器，访问 `http://localhost:3000`
+4. Access Application
+Open browser and visit `http://localhost:3000`
 
-## 使用说明
+## User Guide
 
-### 文件管理
-1. 新建文件
-   - 点击工具栏的"新建文件"按钮
-   - 输入文件名
-   - 开始编辑
+### File Management
+1. Create New File
+   - Click "New File" button in toolbar
+   - Enter filename
+   - Start editing
 
-2. 导入文件
-   - 点击"导入文件"按钮
-   - 选择要导入的文件（支持 .txt 和 .html）
-   - 文件内容会自动加载到编辑器中
+2. Import File
+   - Click "Import File" button
+   - Select file to import (supports .txt and .html)
+   - File content will automatically load into editor
 
-3. 删除文件
-   - 在文件列表中找到要删除的文件
-   - 点击删除图标
-   - 确认删除
+3. Delete File
+   - Find file to delete in file list
+   - Click delete icon
+   - Confirm deletion
 
-### 编辑器使用
-1. 文本编辑
-   - 使用工具栏的各种按钮调整文本样式
-   - 支持快捷键操作（如 Ctrl+B 加粗）
+### Editor Usage
+1. Text Editing
+   - Use toolbar buttons to adjust text styles
+   - Supports keyboard shortcuts (e.g., Ctrl+B for bold)
 
-2. 图片处理
-   - 点击图片上传按钮或直接拖放图片
-   - 调整图片大小：拖动图片边框
-   - 移动图片位置：拖动图片
+2. Image Handling
+   - Click image upload button or drag & drop images
+   - Adjust image size: drag image borders
+   - Move image position: drag image
 
-3. 保存和导出
-   - 点击保存按钮保存当前文档
-   - 点击导出按钮将文档导出为 HTML 文件
+3. Save and Export
+   - Click save button to save current document
+   - Click export button to export document as HTML file
 
-## 注意事项
-- 建议使用现代浏览器（Chrome、Firefox、Edge 等）以获得最佳体验
-- 图片上传大小限制为 5MB
-- 导入 HTML 文件时会自动过滤掉 script 和 style 标签
+## Notes
+- Recommended to use modern browsers (Chrome, Firefox, Edge, etc.) for best experience
+- Image upload size limit is 5MB
+- When importing HTML files, script and style tags will be automatically filtered out
 
-## 贡献指南
-欢迎提交 Issue 和 Pull Request。在提交 PR 之前，请确保：
-1. 代码符合项目的编码规范
-2. 新功能有适当的测试覆盖
-3. 所有测试都能通过
-4. 更新了相关文档
+## Contribution Guide
+Welcome to submit Issues and Pull Requests. Before submitting PR, please ensure:
+1. Code meets project's coding standards
+2. New features have proper test coverage
+3. All tests pass
+4. Relevant documentation is updated
 
-## 许可证
+## License
 MIT License
