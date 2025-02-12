@@ -2,6 +2,8 @@
 
 A powerful online rich text editor with file management, text editing, and image upload capabilities.
 [Playground](https://webtookit-production.up.railway.app/)
+[PlaygroundSite2](https://webtookit-production.up.railway.app/)
+
 
 ## Features
 
